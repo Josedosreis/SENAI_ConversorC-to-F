@@ -1,28 +1,39 @@
-# Conversor de Temperatura !
+#Função
+from funcao import c_f
+from funcao import f_c
 
-# Apresentação
+while True:
+    #Apresentação
 
-print('\n >>> Em qual escala está a temperatura que voce quer converter?')
-print('\n\t >>> Digite C para Celsius, F para Fahrenheit e K para Kelvin ! \n')
+    print('\n------------- Conversor --------------\n')
 
-grau = input('>>>> Digite : ')
-print('\n >> Qual é o valor da temperatura na escala que você quer converter?')
+    #Entrada
 
-# escolha = float(input('------- : '))
+    print('1. Celsius para Fahrenheit')
+    print('2. Fahrenheit para Celsius')
+    print('3. Sair \n')
 
-temperatura = float(input(''))
-print('\n >> Em qual escala está a temperatura para qual você quer converter?')
+    opcao = int(input('Escolha uma opção: '))
+    
+    #Processamento - Saida
+    if opcao == 1:
+        
+        celsius = float(input('Digite a temperatura em Celsius: '))
+        fahrenheit = c_f(celsius)
+        print(f"{celsius}ºC é igual a {fahrenheit}ºF")
 
-# escolha = input('------- : ')
-
-conversao = input()
-
-#(°F − 32) × 5/9 )
-
-if (grau == "f" and  conversao == "c"):
-    print('\n >>>> A tempera em Celsius é:',  (temperatura - 32) * 5 / 9, "C")
-
-if (grau == "c" and  conversao == "f"):
-    print('\n >>>> A temperatura em Fahrenheit é:',  9 * temperatura / 5 + 32, "F")
-
-
+    elif opcao == 2:
+        
+        fahrenheit = float(input('Digite a temperatura em Fahrenheit: '))
+        celsius = f_c(fahrenheit)
+        print(f'{fahrenheit}ºF é igual a {celsius}ºC')
+        
+    elif opcao == 3:
+        
+        print('Tchauuu')
+        
+        break
+    
+    else:
+        
+        print('\n Opção Invalida,Tente novamente!')

@@ -9,26 +9,26 @@ layout = [
     [sg.Text(size=(30, 1), key='output')],
 ]
 
-window = sg.Window('Conversor de Temperatura', layout)
+janela = sg.Window('Conversor de Temperatura', layout)
 
 while True:
-    event, values = window.read()
+    eventos, valores = janela.read()
 
-    if event in (sg.WIN_CLOSED, 'Exit'):
+    if eventos in (sg.WIN_CLOSED, 'Exit'):
         break
-    elif event == 'Celsius para Fahrenheit':
+    elif eventos == 'Celsius para Fahrenheit':
         try:
-            celsius = float(values['input_celsius'])
+            celsius = float(valores['input_celsius'])
             fahrenheit = celsius_para_fahrenheit(celsius)
-            window['output'].update(f'Temperatura em Fahrenheit: {fahrenheit:.2f} °F')
+            janela['output'].update(f'Temperatura em Fahrenheit: {fahrenheit:.2f} °F')
         except ValueError:
             sg.popup_error('Digite um valor válido para a temperatura.')
-    elif event == 'Fahrenheit para Celsius':
+    elif eventos == 'Fahrenheit para Celsius':
         try:
             fahrenheit = float(sg.popup_get_text('Digite a temperatura em Fahrenheit:'))
             celsius = fahrenheit_para_celsius(fahrenheit)
-            window['output'].update(f'Temperatura em Celsius: {celsius:.2f} °C')
+            janela['output'].update(f'Temperatura em Celsius: {celsius:.2f} °C')
         except ValueError:
             sg.popup_error('Digite um valor válido para a temperatura.')
 
-window.close()
+janela.close()

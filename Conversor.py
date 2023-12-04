@@ -1,6 +1,6 @@
 #Função
-from funcao import c_f
-from funcao import f_c
+from funcao import celsius_para_fahrenheit
+from funcao import fahrenheit_para_celsius
 
 while True:
     #Apresentação

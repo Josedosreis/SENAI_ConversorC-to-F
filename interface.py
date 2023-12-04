@@ -1,7 +1,5 @@
 import PySimpleGUI as sg
 
-import funcao
-
 from funcao import celsius_para_fahrenheit, fahrenheit_para_celsius
 
 layout = [

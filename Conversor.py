@@ -19,13 +19,13 @@ while True:
     if opcao == 1:
         
         celsius = float(input('Digite a temperatura em Celsius: '))
-        fahrenheit = c_f(celsius)
+        fahrenheit = celsius_para_fahrenheit(celsius)
         print(f"{celsius}ºC é igual a {fahrenheit}ºF")
 
     elif opcao == 2:
         
         fahrenheit = float(input('Digite a temperatura em Fahrenheit: '))
-        celsius = f_c(fahrenheit)
+        celsius = fahrenheit_para_celsius(fahrenheit)
         print(f'{fahrenheit}ºF é igual a {celsius}ºC')
         
     elif opcao == 3:

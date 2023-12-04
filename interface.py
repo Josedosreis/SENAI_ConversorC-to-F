@@ -1,43 +1,36 @@
-# Sistema de importação e uso do PsGUI
-
-from PySimpleGUI import PySimpleGUI as psg
+import PySimpleGUI as sg
 
 import funcao
 
-from funcao import c_f, f_c
-
-# Layout --------------------------------------------
+from funcao import celsius_para_fahrenheit, fahrenheit_para_celsius
 
 layout = [
-    [psg.Text('Digite o valor da Temperatura:: '), psg.Input(key='valor', size=(15,1))],
-    [psg.Text('Digite a Temperatura: '), psg.Input(key='temp', size=(15,1))],
-    [psg.Text('Conversão: '), psg.Text(key='Resultado'), psg.Text(' <<<< ')],
-    [psg.Button('Converter'), psg.Button('Limpar')]
+    [sg.Text('Conversor de Temperatura')],
+    [sg.Text('Digite a temperatura em Celsius:'), sg.InputText(key='input_celsius')],
+    [sg.Button('Celsius para Fahrenheit'), sg.Button('Fahrenheit para Celsius')],
+    [sg.Text(size=(30, 1), key='output')],
 ]
 
+window = sg.Window('Conversor de Temperatura', layout)
 
-# Janela ------------------------------------------
-janela = psg.Window('Conversor de Temperatura', layout)
-
-# Ler os Eventos ----------------------------------------
 while True:
-    eventos, valores = janela.read()
-    if eventos == psg.WINDOW_CLOSED:
+    event, values = window.read()
+
+    if event in (sg.WIN_CLOSED, 'Exit'):
         break
-    elif eventos == 'Limpar':
-        janela['valor'].update('')
-        janela['temp'].update('')
-        janela['Resultado'].update('')
-        janela['valor'].set_focus()
-        
-    elif eventos == 'valor':  
-        valor = 'c'
-        opcao1 = float(valores['valor'])
-        janela['Resultado'].update(funcao.c_f(opcao1))
-        
-    else:
-        valor = 'f'
-        opcao2 = float(valores['valor'])
-        janela['Resultado'].update(funcao.f_c(opcao2))
-        
-janela.close()
+    elif event == 'Celsius para Fahrenheit':
+        try:
+            celsius = float(values['input_celsius'])
+            fahrenheit = celsius_para_fahrenheit(celsius)
+            window['output'].update(f'Temperatura em Fahrenheit: {fahrenheit:.2f} °F')
+        except ValueError:
+            sg.popup_error('Digite um valor válido para a temperatura.')
+    elif event == 'Fahrenheit para Celsius':
+        try:
+            fahrenheit = float(sg.popup_get_text('Digite a temperatura em Fahrenheit:'))
+            celsius = fahrenheit_para_celsius(fahrenheit)
+            window['output'].update(f'Temperatura em Celsius: {celsius:.2f} °C')
+        except ValueError:
+            sg.popup_error('Digite um valor válido para a temperatura.')
+
+window.close()
